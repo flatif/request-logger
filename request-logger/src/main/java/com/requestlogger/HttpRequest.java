@@ -1,8 +1,12 @@
 package com.requestlogger;
 
-import java.util.Date;
-import java.util.List;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
+@Accessors(fluent=true, chain=true)
+@Setter
+@NoArgsConstructor
 public class HttpRequest extends Request{
 	
 	public enum HttpMethod {
@@ -18,15 +22,4 @@ public class HttpRequest extends Request{
 	private String url;
 	
 	private HttpMethod method;
-
-	public HttpRequest(String requestId, UserDescriptor userDescriptor,
-			Date date, List<MethodInvocation> methodInvocations,
-			RequestExecutionResult executionResult, String url,
-			HttpMethod method) {
-		super(requestId, userDescriptor, date, methodInvocations, executionResult);
-		this.url = url;
-		this.method = method;
-	}
-	
-	
 }
