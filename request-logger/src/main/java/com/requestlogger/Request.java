@@ -5,14 +5,26 @@ import java.util.List;
 
 public abstract class Request {
 	
-	String requestId;
+	protected String requestId;
 	
-	UserDescriptor userDescriptor;
+	protected UserDescriptor userDescriptor;
 	
-	Date date;
+	protected Date date;
 	
-	List<MethodInvocation> methodInvocations;
+	protected List<MethodInvocation> methodInvocations;
 	
-	RequestExecutionResult executionResult;
+	protected RequestExecutionResult executionResult;
+
+	public Request(String requestId, UserDescriptor userDescriptor, Date date,
+			List<MethodInvocation> methodInvocations,
+			RequestExecutionResult executionResult) {
+		this.requestId = requestId;
+		this.userDescriptor = userDescriptor;
+		this.date = date;
+		this.methodInvocations = methodInvocations;
+		this.executionResult = executionResult;
+	}
+	
+	
 	
 }
