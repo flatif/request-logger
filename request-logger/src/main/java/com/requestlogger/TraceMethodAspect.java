@@ -6,6 +6,12 @@ import org.aspectj.lang.annotation.Aspect;
 
 import com.requestlogger.MethodInvocationAppender.MethodInvocationAppenderFactory;
 
+/**
+ * <p>Aspect to intercept and trace a method invocation.</p>
+ * <p>It use a {@link MethodInvocationAppender} to add the method call to a {@link Request}. Creating it from the {@link MethodInvocationAppenderFactory}</p>
+ * @author rascioni
+ *
+ */
 @Aspect
 public class TraceMethodAspect {
 
@@ -13,7 +19,9 @@ public class TraceMethodAspect {
 	public Object addMethodInvocationInformation(ProceedingJoinPoint proceedingJoinPoint, TraceMethodInvocation traceMethodInvocation) throws Throwable{
 		//TODO: serialize method parameters using some subsystem
 		final MethodInvocation methodInvocation = new MethodInvocation(proceedingJoinPoint.getSignature().getName(), null);
-		MethodInvocationAppenderFactory.getInstance().append(methodInvocation);
+		
+		final MethodInvocationAppender methodInvocationAppender = MethodInvocationAppenderFactory.getInstance();
+		methodInvocationAppender.append(methodInvocation);
 		try {
 			return proceedingJoinPoint.proceed();
 		}
@@ -21,6 +29,7 @@ public class TraceMethodAspect {
 			/*
 			 * Set the failure in the method invocation chain
 			 */
+			methodInvocationAppender.requestFailed(t);
 			throw t;
 		}
 	}

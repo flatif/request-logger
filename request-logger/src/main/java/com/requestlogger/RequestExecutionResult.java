@@ -7,9 +7,9 @@ public class RequestExecutionResult {
 		ERROR
 	}
 	
-	private final RequestExecutionOutcome outcome;
+	final RequestExecutionOutcome outcome;
 	
-	private final Throwable throwable;
+	final Throwable throwable;
 	
 	private RequestExecutionResult(RequestExecutionOutcome outcome,
 			Throwable throwable) {

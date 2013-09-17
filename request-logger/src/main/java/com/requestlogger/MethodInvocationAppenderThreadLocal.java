@@ -2,7 +2,8 @@ package com.requestlogger;
 
 import lombok.NonNull;
 /**
- * Class to add method invocations statically to a thread bounded {@link Request}
+ * <p>{@link MethodInvocationAppender} default implementation.</p>
+ * <p>Class to add method invocations statically to a thread bounded {@link Request}.</p>
  * @author rascioni
  *
  */
@@ -28,6 +29,13 @@ public class MethodInvocationAppenderThreadLocal implements MethodInvocationAppe
 			throw new IllegalStateException("Can't add method invocation. Have you set a Request?");
 		}
 		REQUEST.get().addMethodInvocation(methodInvocation);
+	}
+	
+	public void requestFailed(Throwable t) {
+		if (REQUEST.get() == null){
+			throw new IllegalStateException("Can't add method invocation. Have you set a Request?");
+		}
+		REQUEST.get().executionResult(RequestExecutionResult.error(t));
 	}
 	
 	/* (non-Javadoc)

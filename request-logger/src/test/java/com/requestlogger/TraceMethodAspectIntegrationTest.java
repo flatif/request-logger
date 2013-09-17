@@ -1,6 +1,7 @@
 package com.requestlogger;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import com.requestlogger.MethodInvocationAppender.MethodInvocationAppenderFactory;
+import com.requestlogger.RequestExecutionResult.RequestExecutionOutcome;
 
 public class TraceMethodAspectIntegrationTest {
 	static final String SIGNATURE_NAME = "traceMethodAspectTest";
@@ -52,6 +54,38 @@ public class TraceMethodAspectIntegrationTest {
 		assertTrue(controllerMethodTraced && serviceMethodTraced);
 	}
 	
+	@Test
+	public void testAddMethodInvocationInformationException() throws Throwable {
+		
+		final ApplicationContext testContext = new AnnotationConfigApplicationContext(TraceMethodAspectIntegrationTestConfig.class);
+		
+		final TestController testController = testContext.getBean(TestController.class);
+		
+		boolean exceptionThrowed = false;
+		try{
+			testController.exception(SIGNATURE_NAME);
+		}
+		catch (Exception e) {
+			exceptionThrowed = true;
+		}
+		
+		assertTrue(exceptionThrowed);
+		
+		final Request request = MethodInvocationAppenderFactory.getInstance().clear();
+		
+		assertEquals(1, request.methodInvocations.size());
+		
+		assertSame(RequestExecutionOutcome.ERROR, request.executionResult.outcome);
+		
+		assertEquals(SIGNATURE_NAME, request.executionResult.throwable.getMessage());
+		
+		for (MethodInvocation methodInvocation : request.methodInvocations){
+			if (!methodInvocation.methodName().equals("exception")){
+				fail(String.format("Method [%s] shouldn't be in the call stack", methodInvocation));
+			}
+		}
+	}
+	
 	
 	@Configuration
 	@EnableAspectJAutoProxy
@@ -76,6 +110,10 @@ public class TraceMethodAspectIntegrationTest {
 		@TraceMethodInvocation
 		public Object test(){
 			return testService.doSomething("work");
+		}
+		@TraceMethodInvocation
+		public Object exception(String message){
+			throw new RuntimeException(message);
 		}
 	}
 	
