@@ -2,6 +2,13 @@ package com.requestlogger;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.experimental.Accessors;
+
+@AllArgsConstructor
+@Accessors(fluent=true)
+@Getter
 public class MethodInvocation {
 	
 	//Full Name (package.class.methodName)
