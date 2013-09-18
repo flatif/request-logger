@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import lombok.extern.java.Log;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,17 +17,15 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import com.requestlogger.MethodInvocationAppender.MethodInvocationAppenderFactory;
 import com.requestlogger.RequestExecutionResult.RequestExecutionOutcome;
 
-@Log
 public class TraceMethodAspectIntegrationTest {
 	static final String SIGNATURE_NAME = "traceMethodAspectTest";
 	@Before
 	public void setUp() throws Exception {
+		MethodInvocationAppenderFactory.getInstance().set(new TestRequest("TraceMethodAspectIntegrationTest"));
 	}
 
 	@Test
 	public void testAddMethodInvocationInformation() throws Throwable {
-		MethodInvocationAppenderFactory.getInstance().set(new TestRequest("TraceMethodAspectIntegrationTest"));
-		log.info(MethodInvocationAppenderFactory.getInstance().toString());
 		final ApplicationContext testContext = new AnnotationConfigApplicationContext(TraceMethodAspectIntegrationTestConfig.class);
 		
 		final TestController testController = testContext.getBean(TestController.class);
@@ -36,15 +33,11 @@ public class TraceMethodAspectIntegrationTest {
 		testController.test();
 		
 		final Request request = MethodInvocationAppenderFactory.getInstance().clear();
-		System.out.println("REQ: " + request);
+		
 		boolean controllerMethodTraced = false;
 		boolean serviceMethodTraced = false;
-		try{
-			assertEquals(2, request.methodInvocations.size());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		assertEquals(2, request.methodInvocations.size());
 		
 		for (MethodInvocation methodInvocation : request.methodInvocations){
 			if (methodInvocation.methodName().equals("test")){

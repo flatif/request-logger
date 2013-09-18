@@ -49,6 +49,8 @@ public class MethodInvocationAppenderThreadLocal implements MethodInvocationAppe
 	 * @see com.requestlogger.MethodInvocationAppender#clear()
 	 */
 	public Request clear(){
+		System.out.println("MethodInvocationAppenderThreadLocal: " + this.toString());
+		System.out.println("MethodInvocationAppenderThreadLocal-> " + REQUEST.toString());
 		final Request result = REQUEST.get();
 		REQUEST.remove();
 		return result;

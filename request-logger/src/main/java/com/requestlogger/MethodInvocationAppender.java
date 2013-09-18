@@ -65,6 +65,9 @@ public interface MethodInvocationAppender {
 		static void changeFactoryStrategy(MethodInvocationAppenderFactoryStrategy methodInvocationAppenderFactoryStrategy){
 			MethodInvocationAppenderFactory.methodInvocationAppenderFactoryStrategy = methodInvocationAppenderFactoryStrategy;
 		}
+		static void defaultFactoryStrategy(){
+			MethodInvocationAppenderFactory.methodInvocationAppenderFactoryStrategy = new MethodInvocationAppenderThreadLocalFactory();
+		}
 	}
 	/**
 	 * <p>Real implementation for the {@link MethodInvocationAppenderFactory}.</p>

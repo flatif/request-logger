@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -55,6 +56,11 @@ public class TraceMethodAspectTest {
 		final MethodInvocation methodInvocation = argumentCaptor.getValue();
 		
 		assertSame(SIGNATURE_NAME, methodInvocation.methodName());
+	}
+	
+	@After
+	public void cleanUp(){
+		MethodInvocationAppenderFactory.defaultFactoryStrategy();
 	}
 
 }
