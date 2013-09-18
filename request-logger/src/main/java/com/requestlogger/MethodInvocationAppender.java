@@ -14,12 +14,29 @@ import com.requestlogger.MethodInvocationAppenderThreadLocal.MethodInvocationApp
  */
 public interface MethodInvocationAppender {
 
+	/**
+	 * Set a {@link Request} to be traced
+	 * @param request
+	 */
 	void set(@NonNull Request request);
 
+	/**
+	 * Append a {@link MethodInvocation} to the {@link Request} previously set
+	 * @param methodInvocation
+	 */
 	void append(@NonNull MethodInvocation methodInvocation);
 	
-	void requestFailed(Throwable t);
+	/**
+	 * Mark the {@link Request} as failed, setting the passed {@link Throwable} as cause 
+	 * @param t
+	 */
+	void requestFailed(@NonNull Throwable t);
 
+	/**
+	 * <p>Clear the {@link MethodInvocationAppender} from the {@link Request} previously set.</p>
+	 * <p>This method should be called before start with a new {@link Request}.</p>
+	 * @return
+	 */
 	Request clear();
 	
 	/**

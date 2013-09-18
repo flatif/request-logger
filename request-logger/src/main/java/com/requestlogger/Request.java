@@ -6,11 +6,13 @@ import java.util.List;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 @Accessors(fluent=true, chain=true)
 @Setter
 @NoArgsConstructor
+@ToString
 public abstract class Request {
 	
 	protected String requestId;
