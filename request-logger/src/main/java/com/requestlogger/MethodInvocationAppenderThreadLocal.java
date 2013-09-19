@@ -1,23 +1,16 @@
 package com.requestlogger;
 
 import lombok.NonNull;
-import lombok.extern.java.Log;
 /**
  * <p>{@link MethodInvocationAppender} default implementation.</p>
  * <p>Class to add method invocations statically to a thread bounded {@link Request}.</p>
  * @author rascioni
  *
  */
-@Log
 public class MethodInvocationAppenderThreadLocal implements MethodInvocationAppender {
 
 	private final static ThreadLocal<Request> REQUEST = new ThreadLocal<Request>();
-	
-	public MethodInvocationAppenderThreadLocal() {
-		System.out.println("MethodInvocationAppenderThreadLocal: " + this.toString());
-		System.out.println("MethodInvocationAppenderThreadLocal-> " + REQUEST.toString());
-	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.requestlogger.MethodInvocationAppender#set(com.requestlogger.Request)
 	 */
@@ -49,17 +42,13 @@ public class MethodInvocationAppenderThreadLocal implements MethodInvocationAppe
 	 * @see com.requestlogger.MethodInvocationAppender#clear()
 	 */
 	public Request clear(){
-		System.out.println("MethodInvocationAppenderThreadLocal: " + this.toString());
-		System.out.println("MethodInvocationAppenderThreadLocal-> " + REQUEST.toString());
 		final Request result = REQUEST.get();
 		REQUEST.remove();
 		return result;
 	}
 	
-	@Log
 	static class MethodInvocationAppenderThreadLocalFactory implements MethodInvocationAppenderFactoryStrategy{
 		public MethodInvocationAppender create() {
-			log.info(REQUEST.toString());
 			return new MethodInvocationAppenderThreadLocal();
 		}
 	}
