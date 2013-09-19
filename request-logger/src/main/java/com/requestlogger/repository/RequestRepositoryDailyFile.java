@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.MessageFormat;
 import java.util.Date;
@@ -13,36 +12,19 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.requestlogger.Request;
-import com.requestlogger.RequestRepository;
 
 @AllArgsConstructor
 public class RequestRepositoryDailyFile implements RequestRepository {
-	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-	static{
-		OBJECT_MAPPER.setVisibilityChecker(VisibilityChecker.Std.defaultInstance().withFieldVisibility(Visibility.ANY));
-	}
-
-	//Used yyyy-MM-dd date format to easily sort by name
-	private static final String FILE_NAME_FORMAT = "request-log-{0,date,yyyy-MM-dd}.json";
-	
 	private final Path logsDirectory;
 	private final String fileNameFormat;
 	private final ObjectMapper objectMapper;
 	
-	public RequestRepositoryDailyFile(){
-		this.fileNameFormat = FILE_NAME_FORMAT;
-		this.objectMapper = OBJECT_MAPPER;
-		this.logsDirectory = Paths.get("logs");
-	}
-
 	@SneakyThrows
 	public void save(Request request) {
 		append(request);
