@@ -4,7 +4,7 @@ import com.requestlogger.MethodInvocationAppender.MethodInvocationAppenderFactor
 import com.requestlogger.repository.RequestRepository;
 
 /**
- * <p>A class that extends {@link AbstractEntryPoint} represents the point from which a <em>request</em> starts to be traced.</p>
+ * <p>A class that extends {@code AbstractEntryPoint} represents the point from which a <em>request</em> starts to be traced.</p>
  * <p>To start tracing the extender should call the {@link #startTrace(Request)} method. When the trace is finished {@link #endTrace()}
  * should be used to persist the log.</p>
  * <p>The {@link #requestRepository()} method has to be implemented to retrieve an implementation of a {@link RequestRepository}</p>
@@ -22,7 +22,7 @@ public abstract class AbstractEntryPoint {
 	}
 	
 	/**
-	 * Clear 
+	 * Clear and store the {@link Request} previously set in the {@link MethodInvocationAppender}
 	 */
 	protected void endTrace(){
 		final Request request = MethodInvocationAppenderFactory.getInstance().clear();

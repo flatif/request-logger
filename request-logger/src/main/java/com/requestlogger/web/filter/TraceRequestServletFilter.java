@@ -45,6 +45,7 @@ public class TraceRequestServletFilter extends AbstractEntryPoint implements Fil
 		request.method(HttpMethod.valueOf(httpServletRequest.getMethod()));
 		request.url(httpServletRequest.getRequestURL().toString());
 		
+		request.userDescriptor(createUserDescriptor(httpServletRequest));
 		return request;
 	}
 	public UserDescriptor createUserDescriptor(HttpServletRequest request){
