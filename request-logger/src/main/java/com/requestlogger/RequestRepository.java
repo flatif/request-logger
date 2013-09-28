@@ -2,9 +2,9 @@ package com.requestlogger;
 
 import java.util.List;
 
-public interface RequestRepository {
+public interface RequestRepository<R extends Request> {
 
-	void save(HttpRequest request);
+	void save(R request);
 	
-	List<HttpRequest> findAll();
+	List<R> findAll();
 }

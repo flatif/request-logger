@@ -18,7 +18,6 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.requestlogger.HttpRequest;
 import com.requestlogger.Request;
 
@@ -29,7 +28,7 @@ public class RequestRepositoryDailyFile implements RequestRepository {
 	private final ObjectMapper objectMapper;
 	
 	@SneakyThrows
-	public void save(HttpRequest request) {
+	public void save(Request request) {
 		append(request);
 	}
 	
