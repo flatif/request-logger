@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Date;
+import java.util.List;
 
 import lombok.SneakyThrows;
 
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
+import com.requestlogger.HttpRequest;
 import com.requestlogger.Request;
 import com.requestlogger.RequestRepository;
 
@@ -27,7 +29,7 @@ public class RequestRepositoryDailyFile implements RequestRepository {
 	private static final String FILE_NAME_FORMAT = "request-log-{0,date,yyyy-MM-dd}.json";
 
 	@SneakyThrows
-	public void save(Request request) {
+	public void save(HttpRequest request) {
 		append(request);
 	}
 	
@@ -39,5 +41,10 @@ public class RequestRepositoryDailyFile implements RequestRepository {
 		final JsonGenerator generator = OBJECT_MAPPER.getFactory().createGenerator(currentLog(), JsonEncoding.UTF8);
 		generator.useDefaultPrettyPrinter();
 		generator.writeObject(request);
+	}
+
+	public List<HttpRequest> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -1,5 +1,6 @@
 package com.requestlogger;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,6 +8,7 @@ import lombok.experimental.Accessors;
 
 @Accessors(fluent=true, chain=true)
 @Setter
+@Getter
 @NoArgsConstructor
 @ToString(callSuper=true)
 public class HttpRequest extends Request{

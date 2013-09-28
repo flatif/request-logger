@@ -4,13 +4,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Setter(AccessLevel.PACKAGE)
 @NoArgsConstructor(access=AccessLevel.PACKAGE)
+@AllArgsConstructor
 @ToString
+@Getter
 public class RequestExecutionResult {
 	
 	public enum RequestExecutionOutcome {
@@ -26,8 +30,7 @@ public class RequestExecutionResult {
 	 */
 	String throwable;
 	
-	private RequestExecutionResult(RequestExecutionOutcome outcome,
-			Throwable throwable) {
+	private RequestExecutionResult(RequestExecutionOutcome outcome,	Throwable throwable) {
 		this.outcome = outcome;
 		if (throwable != null){
 			this.throwable = toString(throwable);
@@ -35,7 +38,7 @@ public class RequestExecutionResult {
 	}
 	
 	public static RequestExecutionResult ok() {
-		return new RequestExecutionResult(RequestExecutionOutcome.OK, null);
+		return new RequestExecutionResult(RequestExecutionOutcome.OK, (String)null);
 	}
 	
 	public static RequestExecutionResult error(Throwable t) {

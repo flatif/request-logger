@@ -28,6 +28,8 @@ dependencies {
     compile group: 'org.aspectj', name: 'aspectjrt', version: versions.aspectJ
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: versions.jacksonMapper
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: versions.jacksonMapper
+    compile group: 'org.apache.lucene', name: 'lucene-core', version: '4.4.0'
+   compile 'org.apache.lucene:lucene-analyzers-common:4.4.0'
     /** /
     compile group: 'org.slf4j', name: 'slf4j-api', version: versions.slf4j
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: versions.slf4j

@@ -1,6 +1,10 @@
 package com.requestlogger;
 
+import java.util.List;
+
 public interface RequestRepository {
 
-	void save(Request request);
+	void save(HttpRequest request);
+	
+	List<HttpRequest> findAll();
 }
