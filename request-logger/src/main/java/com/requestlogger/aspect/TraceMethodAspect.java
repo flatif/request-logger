@@ -1,9 +1,12 @@
-package com.requestlogger;
+package com.requestlogger.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
+import com.requestlogger.MethodInvocation;
+import com.requestlogger.MethodInvocationAppender;
+import com.requestlogger.Request;
 import com.requestlogger.MethodInvocationAppender.MethodInvocationAppenderFactory;
 
 /**

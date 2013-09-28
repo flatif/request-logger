@@ -36,6 +36,8 @@ dependencies {
     compile group: 'log4j', name: 'log4j', version: '1.2.15'
     //*/
     
+    runtime group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+    
     testCompile group: 'org.springframework', name: 'spring-aop', version: versions.spring
     testCompile group: 'org.springframework', name: 'spring-context', version: versions.spring
     testCompile group: 'junit', name: 'junit', version: '4.+'

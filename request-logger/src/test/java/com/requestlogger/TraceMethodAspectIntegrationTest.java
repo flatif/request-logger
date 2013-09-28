@@ -16,6 +16,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import com.requestlogger.MethodInvocationAppender.MethodInvocationAppenderFactory;
 import com.requestlogger.RequestExecutionResult.RequestExecutionOutcome;
+import com.requestlogger.aspect.TraceMethodAspect;
+import com.requestlogger.aspect.TraceMethodInvocation;
 
 public class TraceMethodAspectIntegrationTest {
 	static final String SIGNATURE_NAME = "traceMethodAspectTest";

@@ -1,5 +1,6 @@
 package com.requestlogger;
 
+import java.util.Arrays;
 import java.util.List;
 
 import lombok.AccessLevel;
@@ -15,6 +16,10 @@ import lombok.experimental.Accessors;
 @Getter
 @ToString
 public class MethodInvocation {
+	
+	public static MethodInvocation create(String methodName, String...params){
+		return new MethodInvocation(methodName, Arrays.asList(params));
+	}
 	
 	//Full Name (package.class.methodName)
 	private String methodName;

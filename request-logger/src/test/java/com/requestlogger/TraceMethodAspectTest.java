@@ -14,6 +14,8 @@ import org.mockito.ArgumentCaptor;
 
 import com.requestlogger.MethodInvocationAppender.MethodInvocationAppenderFactory;
 import com.requestlogger.MethodInvocationAppender.MethodInvocationAppenderFactoryStrategy;
+import com.requestlogger.aspect.TraceMethodAspect;
+import com.requestlogger.aspect.TraceMethodInvocation;
 
 public class TraceMethodAspectTest {
 	static final String SIGNATURE_NAME = "traceMethodAspectTest";
