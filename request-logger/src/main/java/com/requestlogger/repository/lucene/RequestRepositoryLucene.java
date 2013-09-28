@@ -22,7 +22,7 @@ import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
 
 import com.requestlogger.Request;
-import com.requestlogger.RequestRepository;
+import com.requestlogger.repository.RequestRepository;
 
 public class RequestRepositoryLucene<R extends Request> implements RequestRepository<R> {
 	
