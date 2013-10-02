@@ -25,7 +25,7 @@ import com.requestlogger.repository.RequestRepositoryFactory;
 public class TraceRequestServletFilter extends AbstractEntryPoint implements Filter{
 	
 	private static final String DEFAULT_REPOSITORY_CLASS = RequestRepositoryDailyFileFactory.class.getName();
-	private RequestRepository repository;
+	private RequestRepository<HttpRequest> repository;
 	
 	public void doFilter(ServletRequest servletRequest, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
